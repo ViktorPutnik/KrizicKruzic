@@ -1,3 +1,3 @@
 ﻿  krizickruzic.c
-C:\Users\Viktor\OneDrive\Radna površina\FESB\1.Semestar\Programiranje\krizickruzic\krizickruzic\krizickruzic.c(12,6): warning C4101: 'igra': unreferenced local variable
-  krizickruzic.vcxproj -> C:\Users\Viktor\OneDrive\Radna površina\FESB\1.Semestar\Programiranje\krizickruzic\x64\Debug\krizickruzic.exe
+C:\Users\Viktor\OneDrive\Radna površina\fesbStrukture\KrizicKruzic\krizickruzic\krizickruzic\krizickruzic.c(38,19): warning C4133: 'function': incompatible types - from 'int [3][3]' to 'char (*)[3]'
+  krizickruzic.vcxproj -> C:\Users\Viktor\OneDrive\Radna površina\fesbStrukture\KrizicKruzic\krizickruzic\x64\Debug\krizickruzic.exe
