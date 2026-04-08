@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ViktorPutnik\\Documents\\CrissCross\\KrizicKruzic\\krizickruzic\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B86367E4-2603-4F35-A726-EA5BD07ECCB9}|krizickruzic\\krizickruzic.vcxproj|C:\\Users\\ViktorPutnik\\Documents\\CrissCross\\KrizicKruzic\\krizickruzic\\krizickruzic\\krizickruzic.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B86367E4-2603-4F35-A726-EA5BD07ECCB9}|krizickruzic\\krizickruzic.vcxproj|solutionrelative:krizickruzic\\krizickruzic.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\stdio.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "stdio.h",
+              "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\stdio.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\stdio.h",
+              "ToolTip": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\stdio.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\stdio.h",
+              "ViewState": "AgIAAHkCAAAAAAAAAAAawIUCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-08T18:38:22.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "krizickruzic.c",
+              "DocumentMoniker": "C:\\Users\\ViktorPutnik\\Documents\\CrissCross\\KrizicKruzic\\krizickruzic\\krizickruzic\\krizickruzic.c",
+              "RelativeDocumentMoniker": "krizickruzic\\krizickruzic.c",
+              "ToolTip": "C:\\Users\\ViktorPutnik\\Documents\\CrissCross\\KrizicKruzic\\krizickruzic\\krizickruzic\\krizickruzic.c",
+              "RelativeToolTip": "krizickruzic\\krizickruzic.c",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-04-08T18:16:52.877Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

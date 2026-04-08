@@ -1,231 +1,140 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define clrscr() printf("\e[1;1H\e[2J")
+
+
 #include <stdio.h>
-#include <stdbool.h>
 #include <conio.h>
-#define Broj_Plocica 3
-void Pocetno_stanje(int ploca[Broj_Plocica][Broj_Plocica]);
-char Odabir_znaka(char igrac);
-void Postava_Ploce(int ciji_potez,int potezi, int x[Broj_Plocica][Broj_Plocica]);
-void Tijekom_Igre(int ploca[Broj_Plocica][Broj_Plocica]);
-int evaluate(char b[3][3]);
-	
+#include <stdbool.h>
+
+#define N 3
+
+void inicijalizacija(char ploca[N][N]);
+void crtanje(char ploca[N][N], int x, int y);
+int provjera_pobjede(char ploca[N][N]);
+
 int main()
 {
-	int ploca[Broj_Plocica][Broj_Plocica];
+    char ploca[N][N];
+    int x = 0, y = 0;
+    char igrac = 'X';
+    bool game_over = false;
+    int potezi = 0;
 
-	int k = 0, potezi = 0,b=0;
-	char igrac1='p', igrac2,Pobjeda='o';
-	bool kraj = false;
-	igrac1 = Odabir_znaka(igrac1);
-		switch (igrac1)
-		{
-		case 'X':
-			igrac2 = 'O';
-			break;
-		case 'O':
-			igrac2 = 'X';
-			break;
-		}
-	Pocetno_stanje(ploca);
-	for (int i = 1; i < 10; i++)
-	{
-		
-       Postava_Ploce(i, potezi, ploca);
-	   Tijekom_Igre(ploca);
-	   if (i > 4)
-	   {
-		   b = evaluate(ploca);
-		   printf("%d", b);
-		   switch (b)
-		   {
+    inicijalizacija(ploca);
 
-		   case 10:
-			   printf("prvi igrac je pobjednik\n");
-			   kraj = true;
-			   break;
-		   case -10:
-			   printf("drugi igrac je pobjednik\n");
-			   kraj = true;
-			   break;
-		   default:
+    while (!game_over)
+    {
+        system("cls");
 
-			   Tijekom_Igre(ploca);
-			   break;
+        crtanje(ploca, x, y);
+        printf("\nNa potezu: %c\n", igrac);
+        printf("SPACE = postavi znak\n\n\n\n");
 
-		   }
-	   }
-	}
-	
+        int ch = _getch();
 
-	
-	
+        // STRELICE
+        if (ch == 224)
+        {
+            ch = _getch();
 
+            switch (ch)
+            {
+            case 72: if (x > 0) x--; break;         // gore
+            case 80: if (x < N - 1) x++; break;     // dolje
+            case 75: if (y > 0) y--; break;         // lijevo
+            case 77: if (y < N - 1) y++; break;     // desno
+            }
+        }
 
-	return 0;
-}
-void Tijekom_Igre(int ploca[][Broj_Plocica])
-{
+        // SPACE
+        else if (ch == ' ')
+        {
+            if (ploca[x][y] == ' ')
+            {
+                ploca[x][y] = igrac;
+                potezi++;
 
-	for (int i = 0; i < Broj_Plocica; i++)
-	{
-		for (int j = 0; j < Broj_Plocica; j++)
-		{
-			printf("%d ", ploca[i][j]);
-		}
-		printf("\n");
-	}
-}
+                // provjera pobjede
+                int rez = provjera_pobjede(ploca);
+                if (rez != 0)
+                {
+					system("cls");
+                    crtanje(ploca, x, y);
+                    printf("\nPobjednik: %c\n", igrac);
+                    game_over = true;
+                    break;
+                }
 
-int evaluate(char b[3][3])
-{
-	// Checking for Rows for X or O victory. 
-	for (int row = 0; row < 3; row++) {
-		if (b[row][0] == b[row][1]
-			&& b[row][1] == b[row][2]) {
-			if (b[row][0] == 10)
-				return +10;
-			else if (b[row][0] == 20)
-				return -10;
-		}
-	}
+                // neriješeno
+                if (potezi == 9)
+                {
+					system("cls");
+                    crtanje(ploca, x, y);
+                    printf("\nNerijeseno!\n");
+                    game_over = true;
+                    break;
+                }
 
-	// Checking for Columns for X or O victory. 
-	for (int col = 0; col < 3; col++) {
-		if (b[0][col] == b[1][col]
-			&& b[1][col] == b[2][col]) {
-			if (b[0][col] == 10)
-				return +10;
+                // promjena igraca
+                igrac = (igrac == 'X') ? 'O' : 'X';
+            }
+        }
 
-			else if (b[0][col] == 20)
-				return -10;
-		}
-	}
+        // ESC za izlaz
+        else if (ch == 27)
+        {
+            break;
+        }
+    }
 
-	// Checking for Diagonals for X or O victory. 
-	if (b[0][0] == b[1][1] && b[1][1] == b[2][2]) {
-		if (b[0][0] == 10)
-			return +10;
-		else if (b[0][0] == 20)
-			return -10;
-	}
-
-	if (b[0][2] == b[1][1] && b[1][1] == b[2][0]) {
-		if (b[0][2] == 10)
-			return +10;
-		else if (b[0][2] == 20)
-			return -10;
-	}
-
-	// Else if none of them have won then return 0 
-	return 0;
+    return 0;
 }
 
-
-
-
-
-void Postava_Ploce(int ciji_potez,int potezi, int ploca[][Broj_Plocica])
+// inicijalizacija ploce
+void inicijalizacija(char ploca[N][N])
 {
-	int pozicije = 1;
-	if (ciji_potez % 2 == 0 || ciji_potez == 1)
-	{
-		printf("1. igrac neka postavi oznaku na zeljeno mjesto\n");
-		if (pozicije > 0 && pozicije < 9)
-		{
-			scanf("%d", &pozicije);
-			for (int i = 0; i < Broj_Plocica; i++)
-			{
-				for (int j = 0; j < Broj_Plocica; j++)
-				{
-					if (pozicije == ploca[i][j])
-					{
-						ploca[i][j] = 10;
-					}
-				}
-
-			}
-		}
-		else
-		{
-			printf("nedozvoljen broj upisan\n");
-			ciji_potez--;
-		 
-		}
-	}
-	else
-	{
-		printf("2. igrac neka postavi oznaku na zeljeno mjesto\n");
-		if (pozicije > 0 && pozicije < 9)
-		{
-			scanf("%d", &pozicije);
-			for (int i = 0; i < Broj_Plocica; i++)
-			{
-				for (int j = 0; j < Broj_Plocica; j++)
-				{
-					if (pozicije == ploca[i][j])
-					{
-						ploca[i][j] = 20;
-					}
-				}
-
-			}
-		}
-		else
-		{
-			printf("nedozvoljen broj upisan\n");
-			ciji_potez--;
-
-		}
-	}
-	
-}
-void Pocetno_stanje(int ploca[Broj_Plocica][Broj_Plocica])
-{
-	int brojevi[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	int k = 0;
-	printf("pocetno stanje ploce:\n");
-	for (int i = 0; i < Broj_Plocica; i++)
-	{
-		for (int j = 0; j < Broj_Plocica; j++)
-		{
-			printf("I ");
-		}
-		printf("\n");
-	}
-	for (int i = 0; i < Broj_Plocica; i++)
-	{
-		for (int j = 0; j < Broj_Plocica; j++)
-		{
-			ploca[i][j] = brojevi[k];
-			++k;
-		}
-	}
-	printf("polozaj brojeva na ploci:\n");
-	for (int i = 0; i < Broj_Plocica; i++)
-	{
-		for (int j = 0; j < Broj_Plocica; j++)
-		{
-			
-				printf("%d ", ploca[i][j]);
-			
-			
-		}
-		printf("\n");
-	}
-
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            ploca[i][j] = ' ';
 }
 
-
-
-char Odabir_znaka(char igrac)
+// crtanje ploce
+void crtanje(char ploca[N][N], int x, int y)
 {
-	do
-	{
-		printf("upisi simbol 1. igraca:\n");
-		scanf("	%c", &igrac);
-		if (igrac != 'X' && igrac != 'O')
-			printf("niste unijeli tocan znak: pokusaj ponovo\n");
-	} while (igrac != 'X' && igrac != 'O');
-	return igrac;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            if (i == x && j == y)
+                printf("[%c]", ploca[i][j]);
+            else
+                printf(" %c ", ploca[i][j]);
+
+            if (j < N - 1) printf("|");
+        }
+        printf("\n");
+        if (i < N - 1) printf("---+---+---\n");
+    }
+}
+
+// provjera pobjede
+int provjera_pobjede(char b[N][N])
+{
+    // redovi
+    for (int i = 0; i < N; i++)
+        if (b[i][0] != ' ' && b[i][0] == b[i][1] && b[i][1] == b[i][2])
+            return 1;
+
+    // stupci
+    for (int i = 0; i < N; i++)
+        if (b[0][i] != ' ' && b[0][i] == b[1][i] && b[1][i] == b[2][i])
+            return 1;
+
+    // dijagonale
+    if (b[0][0] != ' ' && b[0][0] == b[1][1] && b[1][1] == b[2][2])
+        return 1;
+
+    if (b[0][2] != ' ' && b[0][2] == b[1][1] && b[1][1] == b[2][0])
+        return 1;
+
+    return 0;
 }
